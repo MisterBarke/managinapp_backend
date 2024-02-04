@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const clientsSchema = new mongoose.Schema({
-        user: { type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true },
-        _id: {type: String},
+        _userId: { type: String, required: true },
+        _id: {type: String, required: true},
         client : {type: String, required: [true, 'Veuillez entrer le nom du client']},
         salary : {type: Number, required: [true, "Veuillez entrer le salaire de l'agent'"]},
       

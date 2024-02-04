@@ -5,18 +5,18 @@ const { getUser, postUser, deleteUser } = require('../controllers/usersControlle
 const authenticateUser = require('../middleware/authMiddleware');
 const router = Router();
 
-router.post('/employee', authenticateUser, newEmployee);
-router.get('/employee', authenticateUser, getEmployees);
-router.delete('/employee/:_id', authenticateUser, deleteEmployee);
-router.get('/employee/:_id', authenticateUser, getOneEmployee);
-router.put('/employee/:_id', authenticateUser, editEmployee);
-router.get('/clients', authenticateUser, getClients)
-router.post('/clients',authenticateUser, postClients)
-router.put('/clients/:_id', authenticateUser, updateClient);
-router.delete('/clients/:_id', authenticateUser, deleteClient)
-router.get('/clients/totalsalary', authenticateUser, getTotalSalary)
-router.get('/user', authenticateUser, getUser)
-router.post('/user', authenticateUser, postUser)
-router.delete('/user', authenticateUser, deleteUser)
+router.post('/employees', newEmployee);
+router.get('/employees/:_userId', getEmployees);
+router.delete('/employees/:_id', deleteEmployee);
+router.get('/employees/:_id', getOneEmployee);
+router.put('/employees/:_id', editEmployee);
+router.get('/clients/:_userId', getClients)
+router.post('/clients', postClients)
+router.put('/clients/:_id', updateClient);
+router.delete('/clients/:_id', deleteClient)
+router.get('/clients/totalsalary', getTotalSalary)
+router.get('/user', getUser)
+router.post('/user', postUser)
+router.delete('/user', deleteUser)
 
 module.exports = router;

@@ -1,10 +1,18 @@
 const Employee = require('../models/employeeModel');
+const User = require('../models/userModel');
 
 module.exports.getEmployees = async(req, res)=>{
    try{
-    const allEmployees = Employee.find();
+    const user = await User.findOne({_userId: req.params._userId});
+    console.log(user);
+    if (user) {
+        const allEmployees = Employee.find({_userId: user._userId});
     const getAllEmployees = await allEmployees;
     res.status(200).json({employees: getAllEmployees})
+    }else{
+        return res.status(404).json({ error: 'Utilisateur non trouvé.' });
+    }
+    
    }catch(err){
     console.log('Could not load agents');
     res.status(500).json({error: 'Network error'})
@@ -32,14 +40,16 @@ module.exports.newEmployee = async(req, res)=>{
     }
     catch(err){
          console.log('something went wrong', err);
-         res.status(400).json({ err });
+         res.status(500).json({ err });
     }
 }
 
 module.exports.deleteEmployee = async(req, res)=>{
     try{
         const deleteEmployee = await Employee.deleteOne({_id:req.body._id})
-        if(deleteEmployee.deletedCount === 0){
+        const deleteEmployeeFromParams = await Employee.deleteOne({_id:req.params._id})
+        console.log(deleteEmployeeFromParams);
+        if(deleteEmployee.deletedCount === 0 && deleteEmployeeFromParams.deletedCount ===0){
             return res.status(404).json({error: 'Employee not found'})
         }else{
            return res.status(200).json({success : 'Employee deleted'})

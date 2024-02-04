@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const employeeSchema = new mongoose.Schema({
-        user: { type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true },
+        _userId: { type: String, required: true },
         _id: {type: String, required:[true]},
         nom: {type: String, required: [true, "Veuillez entrer le nom de l'agent"]},
         phone: {type: Number, required: [true, 'Veuillez entrer le numero de telephone']},
