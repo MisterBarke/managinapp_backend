@@ -14,6 +14,7 @@ mongoose.connect(URI)
 .catch((err)=>console.log('Sorry not connected', err))
 app.use(router)
 
+module.exports = app;
 /////firebase admin sdk setup/////////
 /* var admin = require("firebase-admin");
 var serviceAccount = require("./access/serviceAccountKey.json");
