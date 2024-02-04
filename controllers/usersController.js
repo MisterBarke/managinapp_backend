@@ -8,10 +8,10 @@ module.exports.getUser = async(req, res)=>{
         if (!user) {
             return res.status(404).json({message: 'No user found'});
         }
-        res.status(200).json({users: getUser})
+        return res.status(200).json({users: getUser})
     } catch (error) {
         console.error('sorry'+ error);
-        res.status(500).send('erreur survenue');
+       return res.status(500).send('erreur survenue');
     }
 }
 
