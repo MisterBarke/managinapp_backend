@@ -14,7 +14,7 @@ router.get('/clients/:_userId', getClients)
 router.post('/clients', postClients)
 router.put('/clients/:_id', updateClient);
 router.delete('/clients/:_id', deleteClient)
-router.get('/clients/totalsalary', getTotalSalary)
+router.get('/clients/:_userId/totalSalary', getTotalSalary)
 router.get('/user', getUser)
 router.post('/user', postUser)
 router.delete('/user', deleteUser)
