@@ -83,15 +83,15 @@ module.exports.updateClient = async (req, res)=>{
 }
 
 module.exports.getTotalSalary = async (req, res)=>{
-try {
-    const user = await User.findOne({_userId: req.params._userId});
-    if (user) {
-    const allClients = Clients.find({_userId: user._userId});
-    if(allClients){
-        const totalSalary = await Clients.getTotalSalary();
-        res.status(200).json({salary: totalSalary})
-    }
-    }
+    try {
+        const user = await User.findOne({ _userId: req.params._userId });
+        if (user) {
+            const allClients = await Clients.find({ _userId: user._userId });
+            if (allClients) {
+                const totalSalary = await Clients.getTotalSalary(allClients);
+                res.status(200).json({ salary: totalSalary });
+            }
+        }
 } catch (error) {
     res.status(500).json({error: "Network error"})
 }

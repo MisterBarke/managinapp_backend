@@ -12,6 +12,9 @@ clientsSchema.statics.getTotalSalary = async function(){
     try {
         const result = await this.aggregate([
             {
+                $match: { _id: { $in: Clients.map(client => client._id) } }
+            },
+            {
                 $group:{
                     _id: null,
                     totalSalary: {$sum: '$salary'}
