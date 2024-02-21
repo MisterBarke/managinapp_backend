@@ -8,7 +8,7 @@ const clientsSchema = new mongoose.Schema({
       
 });
 
-clientsSchema.statics.getTotalSalary = async function(){
+clientsSchema.statics.getTotalSalaryByUserId = async function(userId){
     try {
         const result = await this.aggregate([
             {
@@ -16,10 +16,9 @@ clientsSchema.statics.getTotalSalary = async function(){
                     _userId: userId
                 }
             },
-         
             {
                 $group:{
-                    _id: null,
+                    _id: '$_userId',
                     totalSalary: {$sum: '$salary'}
                 }
             },
@@ -30,16 +29,17 @@ clientsSchema.statics.getTotalSalary = async function(){
                 }
             }
         ]);
-        if (result.length>0) {
-            return result[0].totalSalary
-        }else{
+        if (result.length > 0) {
+            return result[0].totalSalary;
+        } else {
             return 0;
         }
     } catch (e) {
-        console.error('Error calcultaing total salary', e);
+        console.error('Error calculating total salary', e);
         throw e;
     }
-    }
+}
+
     
  const Clients = mongoose.model('clients', clientsSchema);
 

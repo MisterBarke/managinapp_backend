@@ -1,7 +1,7 @@
 const Clients = require ('../models/clientsModel');
 const User = require('../models/userModel');
 
-module.exports.getClients = async (req, res)=>{
+module.exports.getClient = async (req, res)=>{
     try{
         const user = await User.findOne({_userId: req.params._userId});
         if (user) {
@@ -11,6 +11,18 @@ module.exports.getClients = async (req, res)=>{
         }else{
             return res.status(404).json({ error: 'Utilisateur non trouvé.' });
         }
+        
+    }catch(err){
+        res.status(500).json({error: "Network error"})
+    }
+
+}
+module.exports.getAllClients = async (req, res)=>{
+    try{
+       
+        const allClients = Clients.find();
+        const getAllClients = await allClients;
+        res.status(200).json({clients: getAllClients});
         
     }catch(err){
         res.status(500).json({error: "Network error"})
