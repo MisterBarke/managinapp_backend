@@ -11,6 +11,11 @@ const clientsSchema = new mongoose.Schema({
 clientsSchema.statics.getTotalSalary = async function(){
     try {
         const result = await this.aggregate([
+            {
+                $match: {
+                    _userId: userId
+                }
+            },
          
             {
                 $group:{
