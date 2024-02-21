@@ -17,7 +17,7 @@ module.exports.getClient = async (req, res)=>{
     }
 
 }
-module.exports.getAllClients = async (req, res)=>{
+/* module.exports.getAllClients = async (req, res)=>{
     try{
        
         const allClients = Clients.find();
@@ -28,7 +28,7 @@ module.exports.getAllClients = async (req, res)=>{
         res.status(500).json({error: "Network error"})
     }
 
-}
+} */
 module.exports.postClients = async (req, res)=>{
     try{
         const existedClient = await Clients.findOne({client: req.body.client});

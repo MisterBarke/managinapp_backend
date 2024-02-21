@@ -10,7 +10,7 @@ router.delete('/employees/:_id', deleteEmployee);
 router.get('/employees/:_id', getOneEmployee);
 router.put('/employees/:_id', editEmployee);
 router.get('/clients/:_userId', getClient)
-router.get('/clients', getAllClients)
+//router.get('/clients', getAllClients)
 router.post('/clients', postClients)
 router.put('/clients/:_id', updateClient);
 router.delete('/clients/:_id', deleteClient)
