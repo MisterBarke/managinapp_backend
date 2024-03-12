@@ -1,16 +1,14 @@
+const secretToken = 'D.ACe12345678';
 
+// Middleware pour vérifier le token dans le header
+const verifyToken = (req, res, next)=> {
+    const token = req.headers['x-access-token'];
+    if (!token) return res.status(403).send({ auth: false, message: 'Token manquant.' });
 
-const authenticateUser = (req, res, next) => {
-  const token = req.header('Authorization');
-  if (!token) return res.status(401).json({ message: 'Token non fourni' });
+    if (token !== secretToken) return res.status(401).send({ auth: false, message: 'Token invalide.' });
 
-  try {
-    const decoded = jwt.verify(token, 'businessManagementApp'); // Remplacez 'your_secret_key' par votre clé secrète JWT
-    req.user = decoded.user;
+    // Si le token est valide, passez à la prochaine étape
     next();
-  } catch (error) {
-    res.status(401).json({ message: 'Token non valide' });
-  }
-};
+}
 
-module.exports = authenticateUser;
+module.exports = verifyToken;

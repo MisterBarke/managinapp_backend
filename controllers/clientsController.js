@@ -17,18 +17,7 @@ module.exports.getClient = async (req, res)=>{
     }
 
 }
-/* module.exports.getAllClients = async (req, res)=>{
-    try{
-       
-        const allClients = Clients.find();
-        const getAllClients = await allClients;
-        res.status(200).json({clients: getAllClients});
-        
-    }catch(err){
-        res.status(500).json({error: "Network error"})
-    }
 
-} */
 module.exports.postClients = async (req, res)=>{
     try{
         const existedClient = await Clients.findOne({client: req.body.client});
@@ -60,7 +49,6 @@ module.exports.deleteClient = async (req, res)=>{
 
         const deletedClient = await Clients.deleteOne({_id:req.body._id});
         const deletedClientFromParams = await Clients.deleteOne({_id:req.params._id});
-        console.log(deletedClient +" params id ", deletedClientFromParams);
         if(deletedClient.deletedCount === 0 && deletedClientFromParams ===0){
             return res.status(404).json({Error: 'This client doesn\'t exist'});
         }else{
